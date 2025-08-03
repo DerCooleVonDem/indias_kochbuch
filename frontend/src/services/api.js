@@ -1,5 +1,93 @@
 const API_URL = 'http://localhost:3000/api';
 
+export const shoppingListService = {
+  // Get all shopping list items
+  getAllItems: async () => {
+    try {
+      const response = await fetch(`${API_URL}/shopping-list`);
+      if (!response.ok) {
+        throw new Error('Failed to fetch shopping list items');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching shopping list items:', error);
+      throw error;
+    }
+  },
+
+  // Add a new shopping list item
+  addItem: async (item) => {
+    try {
+      const response = await fetch(`${API_URL}/shopping-list`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to add shopping list item');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error adding shopping list item:', error);
+      throw error;
+    }
+  },
+
+  // Update a shopping list item
+  updateItem: async (id, item) => {
+    try {
+      const response = await fetch(`${API_URL}/shopping-list/${id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+      });
+      if (!response.ok) {
+        throw new Error('Failed to update shopping list item');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(`Error updating shopping list item with ID ${id}:`, error);
+      throw error;
+    }
+  },
+
+  // Delete a shopping list item
+  deleteItem: async (id) => {
+    try {
+      const response = await fetch(`${API_URL}/shopping-list/${id}`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete shopping list item');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error(`Error deleting shopping list item with ID ${id}:`, error);
+      throw error;
+    }
+  },
+
+  // Delete all checked items
+  deleteCheckedItems: async () => {
+    try {
+      const response = await fetch(`${API_URL}/shopping-list/checked`, {
+        method: 'DELETE',
+      });
+      if (!response.ok) {
+        throw new Error('Failed to delete checked shopping list items');
+      }
+      return await response.json();
+    } catch (error) {
+      console.error('Error deleting checked shopping list items:', error);
+      throw error;
+    }
+  },
+};
+
 export const recipeService = {
   // Get all recipes
   getAllRecipes: async () => {

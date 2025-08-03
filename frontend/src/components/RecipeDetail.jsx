@@ -85,14 +85,22 @@ function RecipeDetail({ id }) {
       </Typography>
       
       {recipe.thumbnail_uri && (
-        <Box sx={{ mb: 3, display: 'flex', justifyContent: 'center' }}>
-          <img 
+        <Box 
+          sx={{ 
+            mb: 3, 
+            display: 'flex', 
+            justifyContent: 'center',
+            width: '100%'
+          }}
+        >
+          <Box
+            component="img"
             src={recipe.thumbnail_uri} 
             alt={recipe.title}
-            style={{ 
-              maxWidth: '100%', 
-              maxHeight: '300px', 
-              objectFit: 'contain',
+            sx={{ 
+              width: '100%', 
+              maxHeight: { xs: '200px', sm: '300px' }, 
+              objectFit: 'cover',
               borderRadius: '8px'
             }}
           />
@@ -147,11 +155,18 @@ function RecipeDetail({ id }) {
         </Typography>
       </Box>
       
-      <Stack direction="row" spacing={2} sx={{ mt: 4 }}>
+      <Stack 
+        direction={{ xs: 'column', sm: 'row' }} 
+        spacing={2} 
+        sx={{ mt: 4 }}
+        width="100%"
+      >
         <Button 
           variant="outlined" 
           startIcon={<BackIcon />}
           onClick={() => navigate('/')}
+          fullWidth={true}
+          sx={{ display: { xs: 'flex', sm: 'inline-flex' } }}
         >
           Zurück zu Rezepten
         </Button>
@@ -160,6 +175,8 @@ function RecipeDetail({ id }) {
           color="primary"
           startIcon={<EditIcon />}
           onClick={() => navigate(`/recipe/edit/${recipe.id}`)}
+          fullWidth={true}
+          sx={{ display: { xs: 'flex', sm: 'inline-flex' } }}
         >
           Rezept bearbeiten
         </Button>
@@ -168,6 +185,8 @@ function RecipeDetail({ id }) {
           color="error"
           startIcon={<DeleteIcon />}
           onClick={handleDelete}
+          fullWidth={true}
+          sx={{ display: { xs: 'flex', sm: 'inline-flex' } }}
         >
           Rezept löschen
         </Button>

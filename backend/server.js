@@ -16,6 +16,7 @@ const pool = new Pool({
 module.exports.pool = pool;
 
 const recipesRoutes = require('./routes/recipes');
+const shoppingListRoutes = require('./routes/shopping_list');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -61,6 +62,9 @@ app.get('/', (req, res) => {
 // Recipe routes
 app.use('/api/recipes', recipesRoutes);
 
+// Shopping list routes
+app.use('/api/shopping-list', shoppingListRoutes);
+
 // Example route to test database
 app.get('/api/test', async (req, res) => {
   try {
@@ -71,6 +75,9 @@ app.get('/api/test', async (req, res) => {
     res.status(500).json({ error: 'Server error' });
   }
 });
+
+// Initialize database tables
+const initShoppingList = require('./db/init_shopping_list');
 
 // Start server
 app.listen(PORT, () => {
