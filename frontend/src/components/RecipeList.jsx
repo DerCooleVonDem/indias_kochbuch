@@ -50,8 +50,8 @@ function RecipeList() {
         setRecipes(data);
         setError(null);
       } catch (err) {
-        setError('Fehler beim Abrufen der Rezepte. Bitte versuchen Sie es später erneut.');
-        console.error(err);
+        setError('Fehler beim laden der Rezepte. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut. Wenn das Problem weiterhin besteht, kontaktieren Sie den Support.');
+        console.error('Error fetching recipes:', err);
       } finally {
         setLoading(false);
       }
@@ -66,8 +66,8 @@ function RecipeList() {
         await recipeService.deleteRecipe(id);
         setRecipes(recipes.filter(recipe => recipe.id !== id));
       } catch (err) {
-        setError('Fehler beim Löschen des Rezepts. Bitte versuchen Sie es später erneut.');
-        console.error(err);
+        setError('Fehler beim Löschen des Rezepts. Bitte überprüfen Sie Ihre Internetverbindung und versuchen Sie es erneut.');
+        console.error('Error deleting recipe:', err);
       }
     }
   };
