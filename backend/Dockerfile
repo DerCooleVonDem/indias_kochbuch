@@ -11,10 +11,19 @@ COPY package*.json ./
 # Install dependencies
 RUN npm install
 
+# Install dos2unix to fix line endings from Windows systems
+# This is a common issue that prevents shell scripts from running in containers
+RUN apk add --no-cache dos2unix
+
 # Copy your scripts first and make them executable
 # This ensures that the permissions are set correctly before the rest of the code is copied
 COPY start.sh ./
 COPY init-db.sh ./
+
+# Convert the line endings of the scripts to be compatible with Linux
+RUN dos2unix ./start.sh ./init-db.sh
+
+# Make the scripts executable
 RUN chmod +x ./start.sh ./init-db.sh
 
 # Copy the rest of your application code
