@@ -1,27 +1,32 @@
+# Use a Node.js base image
 FROM node:18-alpine
 
-# Install PostgreSQL client tools and bash for better shell script support
-RUN apk add --no-cache postgresql-client bash
-
+# Set the working directory inside the container
 WORKDIR /app
 
+# Copy the package.json and package-lock.json to the working directory
+# This step is cached, so it's efficient if dependencies don't change
 COPY package*.json ./
 
+# Install dependencies
 RUN npm install
 
-# Copy initialization scripts first to ensure they're properly set up
-COPY init-db.sh /app/
-COPY start.sh /app/
-COPY db/ /app/db/
+# Copy your scripts first and make them executable
+# This ensures that the permissions are set correctly before the rest of the code is copied
+COPY start.sh ./
+COPY init-db.sh ./
+RUN chmod +x ./start.sh ./init-db.sh
 
-# Make the initialization scripts executable
-RUN chmod +x /app/init-db.sh
-RUN chmod +x /app/start.sh
-
-# Copy the rest of the application
+# Copy the rest of your application code
+# This copies everything else, including your backend source and the db directory
 COPY . .
 
+# Recommended security practice: switch to a non-root user
+USER node
+
+# Expose the port your application runs on
 EXPOSE 3000
 
-# Use bash to run the start script for better error handling
-CMD ["/bin/bash", "/app/start.sh"]
+# Command to run the application when the container starts
+# The start.sh script will be executed with the correct permissions
+CMD ["./start.sh"]
