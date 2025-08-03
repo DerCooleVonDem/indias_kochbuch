@@ -1,0 +1,54 @@
+/* 
+  App.css
+  This file contains minimal custom styles that complement Material UI.
+  Most styling is now handled by Material UI components directly.
+*/
+
+/* Root container styles */
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0;
+}
+
+/* Custom transitions and animations */
+.fade-in {
+  animation: fadeIn 0.3s ease-in;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+/* Any custom utility classes that might be needed */
+.text-center {
+  text-align: center;
+}
+
+.text-left {
+  text-align: left;
+}
+
+.pre-line {
+  white-space: pre-line;
+}
+
+/* Custom scrollbar for better UX */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}

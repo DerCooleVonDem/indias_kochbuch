@@ -1,0 +1,26 @@
+/*
+  index.css
+  Global styles that apply to the entire application.
+  Most styling is now handled by Material UI theme.
+*/
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: #f8f9fa;
+  
+  /* Better text rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Focus styles for accessibility */
+:focus-visible {
+  outline: 2px solid #1976d2;
+  outline-offset: 2px;
+}
