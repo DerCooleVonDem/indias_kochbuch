@@ -1,4 +1,4 @@
-const API_URL = '/api';
+const API_URL = 'http://217.154.206.172/api';
 
 export const shoppingListService = {
   // Get all shopping list items
